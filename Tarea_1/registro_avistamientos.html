@@ -1,81 +1,73 @@
 <!DOCTYPE html>
-<html lang = "es">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro Aviario</title>
+    <title>Registrar Avistamiento - Registro Aviario</title>
     <link rel="stylesheet" href="css/estilos2.css">
 </head>
 <body>
-<h1>Registro de Voluntarios</h1>
-<p>Unete hoy y se parte de esta comunidad.</p>
+<h1>Registrar Avistamiento</h1>
+<p>Cuéntanos qué ave viste, dónde y cuándo.</p>
+ 
     <nav>
         <ul>
             <li><a href="index.html">Volver al inicio</a></li>
-            <li><a href="registro_voluntarios.html">Registro de Voluntrios</a></li>
+            <li><a href="registro_voluntarios.html">Registro de Voluntarios</a></li>
             <li><a href="listado_avistamientos.html">Listado de avistamientos</a></li>
             <li><a href="indicadores.html">Métricas e indicadores</a></li>
         </ul>
     </nav>
+ 
     <main>
-
-        <form>
-
-        <label>Nombre y apellidos:</label>
-        <input type="text" id="Nombre_completo" maxlength="80" minlength="3" name="Nombre_completo" placeholder="Jane Doe" required>
-
-        <label>Dirección de correo electronico:</label>
-        <input type="email" id="Dir_electronico" name="Dir_electronico" required>
-
-        <label>Repetir la dirección de correo:</label>
-        <input type="email" id="Dir_electronico_repeat" name="Dir_electronico_repeat" required 
-        oninput="check(this)">
-
-        <label for="telefono">Numero de Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
-        
-        <label>Región de recidencia (hogar principal):</label>
-        <select id="region" name="region" required>
-            <option value="">-- Selecciona una región --</option>
-            <option value="metropolitana">Metropolitana</option>
-            <option value="arica_y_parinacota">Arica y Parinacota</option>
-            <option value="tarapaca">Tarapacá</option>
-            <option value="antofagasta">Antofagasta</option>
-            <option value="atacama">Atacama</option>
-            <option value="coquimbo">Coquimbo</option>
-            <option value="valparaiso">Valparaíso</option>
-            <option value="o_higgins">O'Higgins</option>
-            <option value="maule">Maule</option>
-            <option value="nuble">Ñuble</option>
-            <option value="biobio">Biobío</option>
-            <option value="la_araucania">Araucania</option>
-            <option value="los_rios">Los Ríos</option>
-            <option value="los_lagos">Los Lagos</option>
-            <option value="aysen">Aysén</option>
-            <option value="magallanes_y_la_antartica">Antártica</option>
-        </select><br>
-
-        <label for="comuna">Comuna: *</label>
-        <select id="comuna" name="comuna" required disabled>
-            <option value="">-- Primero selecciona una región --</option>
-        </select>
-
-
-        <input type="submit" value="Nuevo Voluntario" /> 
+        <form id="form-avistamiento">
+ 
+            <label for="tipo_ave">Tipo de ave: *</label>
+            <select id="tipo_ave" name="tipo_ave" required>
+                <option value="">-- Selecciona un tipo --</option>
+                <option value="rapaz">Rapaz</option>
+                <option value="acuatica">Acuática</option>
+                <option value="paseriforme">Paseriforme</option>
+                <option value="rasora">Rasora</option>
+                <option value="marina">Marina</option>
+            </select>
+            <br>
+ 
+            <label for="nombre_ave">Nombre del ave: *</label>
+            <select id="nombre_ave" name="nombre_ave" required disabled>
+                <option value="">-- Primero selecciona un tipo --</option>
+            </select>
+            <br>
+ 
+            <label for="lugar">Lugar del avistamiento: *</label>
+            <input type="text" id="lugar" name="lugar" minlength="3" maxlength="100"
+                   placeholder="Ej: Parque Metropolitano, Santiago" required>
+            <br>
+ 
+            <label for="fecha_avistamiento">Fecha del avistamiento: *</label>
+            <input type="date" id="fecha_avistamiento" name="fecha_avistamiento" required>
+            <br>
+ 
+            <label for="hora_avistamiento">Hora del avistamiento: *</label>
+            <input type="time" id="hora_avistamiento" name="hora_avistamiento" required>
+            <br>
+ 
+            <label for="foto_avistamiento">Foto del avistamiento:</label>
+            <input type="file" id="foto_avistamiento" name="foto_avistamiento" accept="image/*">
+            <br>
+ 
+            <label for="video_avistamiento">Video del avistamiento:</label>
+            <input type="file" id="video_avistamiento" name="video_avistamiento" accept="video/*">
+            <br>
+            <p><em>Debes adjuntar al menos una foto o un video.</em></p>
+            <span id="archivo-error" class="mensaje-error"></span>
+            <br><br>
+ 
+            <input type="submit" value="Registrar avistamiento">
         </form>
     </main>
-
-<script src="js/regiones_comunas.js"></script>
-<script src="js/registro_voluntario.js"></script>
-<script>
-function check(input) {
-  if (input.value != document.getElementById('Dir_electronico').value) {
-    input.setCustomValidity('The two email addresses must match.');
-  } else {
-    // input is valid -- reset the error message
-    input.setCustomValidity('');
-  }
-}
-</script>
-
+ 
+<script src="js/tipos-ave.js"></script>
+<script src="js/registro-avistamiento.js"></script>
+ 
 </body>
 </html>
