@@ -16,5 +16,28 @@
             <li><a href="listado_avistamientos.html">Listado de avistamientos</a></li>
         </ul>
     </nav>
+        <main>
+        <section id="resumen-numerico">
+            <article>
+                <h2>Voluntarios registrados</h2>
+                <p id="total-voluntarios" class="numero-destacado"></p>
+            </article>
+            <article>
+                <h2>Avistamientos registrados</h2>
+                <p id="total-avistamientos" class="numero-destacado"></p>
+            </article>
+        </section>
+ 
+        <section id="graficos">
+            <div class="contenedor-grafico">
+                <h2>Avistamientos por tipo de ave</h2>
+                <canvas id="grafico-tipos"></canvas>
+            </div>
+            <div class="contenedor-grafico">
+                <h2>Voluntarios por región</h2>
+                <canvas id="grafico-regiones"></canvas>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
