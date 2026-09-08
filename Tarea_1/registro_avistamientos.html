@@ -16,5 +16,66 @@
             <li><a href="indicadores.html">Métricas e indicadores</a></li>
         </ul>
     </nav>
+    <main>
+
+        <form>
+
+        <label>Nombre y apellidos:</label>
+        <input type="text" id="Nombre_completo" maxlength="80" minlength="3" name="Nombre_completo" placeholder="Jane Doe" required>
+
+        <label>Dirección de correo electronico:</label>
+        <input type="email" id="Dir_electronico" name="Dir_electronico" required>
+
+        <label>Repetir la dirección de correo:</label>
+        <input type="email" id="Dir_electronico_repeat" name="Dir_electronico_repeat" required 
+        oninput="check(this)">
+
+        <label for="telefono">Numero de Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
+        
+        <label>Región de recidencia (hogar principal):</label>
+        <select id="region" name="region" required>
+            <option value="">-- Selecciona una región --</option>
+            <option value="metropolitana">Metropolitana</option>
+            <option value="arica_y_parinacota">Arica y Parinacota</option>
+            <option value="tarapaca">Tarapacá</option>
+            <option value="antofagasta">Antofagasta</option>
+            <option value="atacama">Atacama</option>
+            <option value="coquimbo">Coquimbo</option>
+            <option value="valparaiso">Valparaíso</option>
+            <option value="o_higgins">O'Higgins</option>
+            <option value="maule">Maule</option>
+            <option value="nuble">Ñuble</option>
+            <option value="biobio">Biobío</option>
+            <option value="la_araucania">Araucania</option>
+            <option value="los_rios">Los Ríos</option>
+            <option value="los_lagos">Los Lagos</option>
+            <option value="aysen">Aysén</option>
+            <option value="magallanes_y_la_antartica">Antártica</option>
+        </select><br>
+
+        <label for="comuna">Comuna: *</label>
+        <select id="comuna" name="comuna" required disabled>
+            <option value="">-- Primero selecciona una región --</option>
+        </select>
+
+
+        <input type="submit" value="Nuevo Voluntario" /> 
+        </form>
+    </main>
+
+<script src="js/regiones_comunas.js"></script>
+<script src="js/registro_voluntario.js"></script>
+<script>
+function check(input) {
+  if (input.value != document.getElementById('Dir_electronico').value) {
+    input.setCustomValidity('The two email addresses must match.');
+  } else {
+    // input is valid -- reset the error message
+    input.setCustomValidity('');
+  }
+}
+</script>
+
 </body>
 </html>
