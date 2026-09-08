@@ -1,0 +1,30 @@
+body {
+    background-color: lightyellow;
+}
+
+nav ul {
+    list-style: none;      /* saca las viñetas */
+    display: grid;         /* pone los <li> en fila en vez de uno debajo del otro */
+    grid-template-columns: repeat(2, 150px);
+    gap: 1rem;              /* espacio entre cada botón */
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+  width: 100%; /* Cada elemento ocupa la mitad del ancho total */
+  box-sizing: border-box; /* Evita problemas con el padding */
+}
+
+nav a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    background-color: #2e7d32;   /* verde, tema aves/naturaleza */
+    color: white;
+    text-decoration: none;       /* saca el subrayado del link */
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #1b5e20;   /* verde más oscuro al pasar el mouse */
+}
