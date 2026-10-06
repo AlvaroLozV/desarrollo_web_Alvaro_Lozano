@@ -62,46 +62,6 @@ def index():
     )
     return render_template("index.html", avistamientos=ultimos_avistamientos)
 
-
-# ---------- Indicadores ----------
-@app.route("/indicadores")
-def indicadores():
-    total_voluntarios = Voluntario.query.count()
-    total_avistamientos = Avistamiento.query.count()
-
-    # Top 10 aves más avistadas
-    conteo_por_ave = (
-        db.session.query(Ave.nombre, func.count(Avistamiento.id))
-        .join(Avistamiento, Avistamiento.ave_id == Ave.id)
-        .group_by(Ave.nombre)
-        .order_by(func.count(Avistamiento.id).desc())
-        .limit(10)
-        .all()
-    )
-    etiquetas_ave = [fila[0] for fila in conteo_por_ave]
-    valores_ave = [fila[1] for fila in conteo_por_ave]
-
-    # Voluntarios por región.
-    conteo_por_region = (
-        db.session.query(Region.nombre, func.count(Voluntario.id))
-        .join(Comuna, Comuna.region_id == Region.id)
-        .join(Voluntario, Voluntario.comuna_id == Comuna.id)
-        .group_by(Region.nombre)
-        .order_by(func.count(Voluntario.id).desc())
-        .all()
-    )
-    etiquetas_region = [fila[0] for fila in conteo_por_region]
-    valores_region = [fila[1] for fila in conteo_por_region]
-
-    return render_template(
-        "indicadores.html",
-        total_voluntarios=total_voluntarios,
-        total_avistamientos=total_avistamientos,
-        etiquetas_ave=etiquetas_ave, valores_ave=valores_ave,
-        etiquetas_region=etiquetas_region, valores_region=valores_region,
-    )
-
-
 # ---------- API auxiliar para la cascada región -> comuna ----------
 @app.route("/api/comunas/<int:region_id>")
 def api_comunas(region_id):
