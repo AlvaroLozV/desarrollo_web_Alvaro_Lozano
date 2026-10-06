@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle de Avistamiento - Registro Aviario{% endblock %}
+{% block encabezado %}Detalle del Avistamiento{% endblock %}
+
+{% block contenido %}
+<dl>
+    <dt>Ave</dt>
+    <dd>{{ avistamiento.ave.nombre }}</dd>
+
+    <dt>Lugar</dt>
+    <dd>{{ avistamiento.lugar }}</dd>
+
+    <dt>Fecha y hora</dt>
+    <dd>{{ avistamiento.fecha_hora.strftime('%d-%m-%Y %H:%M') }}</dd>
+
+    <dt>Voluntario</dt>
+    <dd>{{ avistamiento.voluntario.nombre }} ({{ avistamiento.voluntario.email }})</dd>
+
+    {% if avistamiento.descripcion %}
+        <dt>Descripción</dt>
+        <dd>{{ avistamiento.descripcion }}</dd>
+    {% endif %}
+</dl>
+
+<h2>Fotos y videos</h2>
+<section id="galeria-archivos">
+    {% for registro in avistamiento.registros %}
+        {% set extension = registro.ruta_archivo.rsplit('.', 1)[-1].lower() %}
+        <figure>
+            {% if extension in ['mp4', 'mov', 'avi', 'webm'] %}
+                <video controls>
+                    <source src="{{ url_for('static', filename=registro.ruta_archivo) }}">
+                    Tu navegador no soporta la reproducción de este video.
+                </video>
+            {% else %}
+                <img src="{{ url_for('static', filename=registro.ruta_archivo) }}"
+                     alt="Foto del avistamiento">
+            {% endif %}
+            <figcaption>{{ registro.nombre_archivo }}</figcaption>
+        </figure>
+    {% else %}
+        <p>Este avistamiento no tiene archivos adjuntos.</p>
+    {% endfor %}
+</section>
+
+<p><a href="{{ url_for('listado_avistamientos') }}">&laquo; Volver al listado</a></p>
+{% endblock %}

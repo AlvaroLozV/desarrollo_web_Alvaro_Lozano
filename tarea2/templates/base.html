@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}Registro Aviario{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+<h1>{% block encabezado %}Registro de aves de Chile{% endblock %}</h1>
+{% block subtitulo %}{% endblock %}
+
+<nav>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Volver al inicio</a></li>
+        <li><a href="{{ url_for('registrar_voluntario') }}">Registro de Voluntarios</a></li>
+        <li><a href="{{ url_for('registrar_avistamiento') }}">Registrar avistamientos</a></li>
+        <li><a href="{{ url_for('listado_avistamientos') }}">Listado de avistamientos</a></li>
+        <li><a href="{{ url_for('indicadores') }}">Métricas e indicadores</a></li>
+    </ul>
+</nav>
+
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% if mensajes %}
+        <section id="mensajes-flash">
+            {% for categoria, mensaje in mensajes %}
+                <p class="mensaje-{{ categoria }}">{{ mensaje }}</p>
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endwith %}
+
+<main>
+    {% block contenido %}{% endblock %}
+</main>
+
+</body>
+</html>

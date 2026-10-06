@@ -6,17 +6,17 @@
     <link rel="stylesheet" href="css/estilos2.css">
 </head>
 <body>
-<h1>Litado de Avistamientos</h1>
-<p>Unete hoy y se parte de esta comunidad.</p>
+<h1>Listado de Avistamientos</h1>
+ 
     <nav>
         <ul>
             <li><a href="index.html">Volver al inicio</a></li>
-            <li><a href="registro_voluntarios.html">Registro de Voluntrios</a></li>
+            <li><a href="registro_voluntarios.html">Registro de Voluntarios</a></li>
             <li><a href="registro_avistamientos.html">Registrar avistamientos</a></li>
             <li><a href="indicadores.html">Métricas e indicadores</a></li>
         </ul>
     </nav>
-
+ 
     <main>
         <section id="controles-listado">
             <label for="filtro-tipo">Filtrar por tipo de ave:</label>
@@ -28,7 +28,39 @@
                 <option value="rasora">Rasora</option>
                 <option value="marina">Marina</option>
             </select>
+ 
+            <label for="orden">Ordenar por:</label>
+            <select id="orden">
+                <option value="fecha_desc">Fecha (más reciente primero)</option>
+                <option value="fecha_asc">Fecha (más antigua primero)</option>
+                <option value="lugar_asc">Lugar (A-Z)</option>
+            </select>
+        </section>
+ 
+        <table>
+            <thead>
+                <tr>
+                    <th>Ave</th>
+                    <th>Tipo</th>
+                    <th>Lugar</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-avistamientos">
+                <!-- Se llena dinámicamente desde listado.js -->
+            </tbody>
+        </table>
+ 
+        <section id="paginacion">
+            <button id="btn-anterior">&laquo; Anterior</button>
+            <span id="info-pagina"></span>
+            <button id="btn-siguiente">Siguiente &raquo;</button>
         </section>
     </main>
+ 
+<script src="js/datos-simulados.js"></script>
+<script src="js/listado.js"></script>
+ 
 </body>
 </html>

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registrar Avistamiento - Registro Aviario{% endblock %}
+{% block encabezado %}Registrar Avistamiento{% endblock %}
+{% block subtitulo %}<p>Cuéntanos qué ave viste, dónde y cuándo.</p>{% endblock %}
+
+{% block contenido %}
+<form id="form-avistamiento" method="POST" enctype="multipart/form-data" novalidate>
+
+    <label for="voluntario_email">Tu correo de voluntario: *</label>
+    <input type="email" id="voluntario_email" name="voluntario_email"
+           placeholder="El mismo con el que te registraste"
+           value="{{ valores.voluntario_email }}" required>
+    {% if errores.voluntario_email %}<span class="mensaje-error">{{ errores.voluntario_email }}</span>{% endif %}
+    <p><em>¿Aún no te registras? <a href="{{ url_for('registrar_voluntario') }}">Hazlo aquí primero</a>.</em></p>
+    <br>
+
+    <label for="ave_id">Ave avistada: *</label>
+    <select id="ave_id" name="ave_id" required>
+        <option value="">-- Selecciona un ave --</option>
+        {% for ave in aves %}
+            <option value="{{ ave.id }}" {% if valores.ave_id == ave.id|string %}selected{% endif %}>
+                {{ ave.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+    {% if errores.ave_id %}<span class="mensaje-error">{{ errores.ave_id }}</span>{% endif %}
+    <br>
+
+    <label for="lugar">Lugar del avistamiento: *</label>
+    <input type="text" id="lugar" name="lugar" minlength="3" maxlength="100"
+           placeholder="Ej: Parque Metropolitano, Santiago" value="{{ valores.lugar }}" required>
+    {% if errores.lugar %}<span class="mensaje-error">{{ errores.lugar }}</span>{% endif %}
+    <br>
+
+    <label for="fecha_avistamiento">Fecha del avistamiento: *</label>
+    <input type="date" id="fecha_avistamiento" name="fecha_avistamiento"
+           value="{{ valores.fecha_avistamiento }}" required>
+    <br>
+
+    <label for="hora_avistamiento">Hora del avistamiento: *</label>
+    <input type="time" id="hora_avistamiento" name="hora_avistamiento"
+           value="{{ valores.hora_avistamiento }}" required>
+    {% if errores.fecha_avistamiento %}<span class="mensaje-error">{{ errores.fecha_avistamiento }}</span>{% endif %}
+    <br>
+
+    <label for="foto_avistamiento">Foto del avistamiento:</label>
+    <input type="file" id="foto_avistamiento" name="foto_avistamiento" accept="image/*">
+    <br>
+
+    <label for="video_avistamiento">Video del avistamiento:</label>
+    <input type="file" id="video_avistamiento" name="video_avistamiento" accept="video/*">
+    <br>
+    <p><em>Debes adjuntar al menos una foto o un video.</em></p>
+    {% if errores.archivos %}<span class="mensaje-error">{{ errores.archivos }}</span>{% endif %}
+    <br><br>
+
+    <input type="submit" value="Registrar avistamiento">
+</form>
+
+<script src="{{ url_for('static', filename='js/registro_avistamiento.js') }}"></script>
+{% endblock %}

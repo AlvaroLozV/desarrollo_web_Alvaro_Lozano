@@ -1,0 +1,262 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    background-color: lightyellow;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    /* margin: 0; */
+}
+
+nav a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    background-color: #2e7d32;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #1b5e20;
+}
+
+form label {
+    display: inline-block;
+    width: 220px;
+    margin-top: 0.5rem;
+}
+
+.mensaje-error {
+    color: #c62828;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+#mensajes-flash .mensaje-exito {
+    color: #1b5e20;
+    background-color: #e8f5e9;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #2e7d32;
+    display: inline-block;
+}
+
+#resumen-numerico {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+ 
+
+#resumen-numerico article {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+
+
+.numero-destacado {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin: 0;
+}
+
+#graficos {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contenedor-grafico {
+    max-width: 400px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+tbody tr:hover {
+    background-color: #f1f8e9;
+}
+
+#controles-listado {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+#paginacion {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#galeria-archivos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+#galeria-archivos figure {
+    margin: 0;
+    text-align: center;
+}
+
+#galeria-archivos img,
+#galeria-archivos video {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+} 
+
+
+#galeria-archivos figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+dl dt {
+    font-weight: bold;
+    margin-top: 0.75rem;
+}
+
+dl dd {
+    margin-left: 0;
+}
+
+
+:invalid { 
+  border-color: #e88;
+  -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+  -moz-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
+  -o-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
+  -ms-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
+  box-shadow:0 0 5px rgba(255, 0, 0, .8);
+}
+
+:required {
+  border-color: rgb(0, 0, 0);
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
+  -o-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
+  -ms-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
+  box-shadow: 0 0 5px rgba(0, 0, 255, .5);
+}
+
+form {
+  width:300px;
+  margin: 20px auto;
+}
+
+input {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border:1px solid #ccc;
+  font-size:20px;
+  width:300px;
+  min-height:30px;
+  display:block;
+  margin-bottom:15px;
+  margin-top:5px;
+  outline: none;
+
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -ms-border-radius:5px;
+  border-radius:5px;
+}
+
+input[type=submit] {
+  background:none;
+  padding:10px;
+}
+
+select {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border:1px solid #ccc;
+  font-size:20px;
+  width:300px;
+  min-height:30px;
+  display:block;
+  margin-bottom:15px;
+  margin-top:5px;
+  outline: none;
+
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -ms-border-radius:5px;
+  border-radius:5px;
+}
+
+select[type=submit] {
+  background:none;
+  padding:10px;
+}
+
+.tarjeta-avistamiento .sin-foto {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border-radius: 6px;
+    color: #777;
+}
+ 
+.detalle-avistamiento {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tarjeta-avistamiento {
+    text-align: center;
+}
+ 
+.tarjeta-avistamiento img,
+.tarjeta-avistamiento video {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+}
+ 
+#ultimos-avistamientos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 700px;
+}
+ 
+ 
+
+ 
+
+
