@@ -40,8 +40,6 @@ Alvaro Lozano
 
 - **Cascada región → comuna vía AJAX.** A diferencia de la Tarea 1 (donde las comunas vivían en un objeto JavaScript fijo), ahora se consulta un endpoint propio (`/api/comunas/<region_id>`) que devuelve JSON, ya que los datos reales viven en la base de datos y pueden cambiar.
 
-- **Indicadores.** Se implementó de todas formas una versión inicial conectada a los datos mediante el uso de IA de manera pre-eliminar (conteo de voluntarios por región y top 10 aves más avistadas) por completitud. Se actualizará en futuras entregas de ser necesario.
-
 ## Estructura del proyecto
 
 ```
