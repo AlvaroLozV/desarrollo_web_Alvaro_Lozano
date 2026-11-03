@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registro Aviario{% endblock %}
+{% block encabezado %}Registro de Voluntarios{% endblock %}
+{% block subtitulo %}<p>Unete hoy y se parte de esta comunidad.</p>{% endblock %}
+
+{% block contenido %}
+<form method="POST" novalidate>
+
+    <label>Nombre y apellidos:</label>
+    <input type="text" id="Nombre_completo" maxlength="80" minlength="3" name="Nombre_completo"
+           placeholder="Jane Doe" value="{{ valores.Nombre_completo }}" required>
+    {% if errores.Nombre_completo %}<span class="mensaje-error">{{ errores.Nombre_completo }}</span>{% endif %}
+
+    <label>Dirección de correo electronico:</label>
+    <input type="email" id="Dir_electronico" name="Dir_electronico"
+           value="{{ valores.Dir_electronico }}" required>
+    {% if errores.Dir_electronico %}<span class="mensaje-error">{{ errores.Dir_electronico }}</span>{% endif %}
+
+    <label>Repetir la dirección de correo:</label>
+    <input type="email" id="Dir_electronico_repeat" name="Dir_electronico_repeat" required
+    oninput="check(this)">
+
+    <label for="telefono">Numero de Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678"
+           value="{{ valores.telefono }}" required>
+    {% if errores.telefono %}<span class="mensaje-error">{{ errores.telefono }}</span>{% endif %}
+
+    <label>Región de recidencia (hogar principal):</label>
+    <select id="region" name="region" required data-previa="{{ valores.region }}">
+        <option value="">-- Selecciona una región --</option>
+        {% for region in regiones %}
+            <option value="{{ region.id }}" {% if valores.region == region.id|string %}selected{% endif %}>
+                {{ region.nombre }}
+            </option>
+        {% endfor %}
+    </select><br>
+
+    <label for="comuna">Comuna: *</label>
+    <select id="comuna" name="comuna" required disabled data-previa="{{ valores.comuna }}">
+        <option value="">-- Primero selecciona una región --</option>
+    </select>
+    {% if errores.comuna %}<span class="mensaje-error">{{ errores.comuna }}</span>{% endif %}
+
+    <input type="submit" value="Nuevo Voluntario" />
+</form>
+
+<script src="{{ url_for('static', filename='js/registro_voluntario.js') }}"></script>
+<script>
+function check(input) {
+  if (input.value != document.getElementById('Dir_electronico').value) {
+    input.setCustomValidity('The two email addresses must match.');
+  } else {
+    input.setCustomValidity('');
+  }
+}
+</script>
+{% endblock %}

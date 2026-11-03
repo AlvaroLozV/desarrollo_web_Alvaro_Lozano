@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block titulo %}Estadísticas - Registro Aviario{% endblock %}
+{% block encabezado %}Estadísticas{% endblock %}
+{% block head_extra %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+<div id="graficos">
+    <article class="contenedor-grafico">
+        <h2>Avistamientos por día</h2>
+        <canvas id="grafico-dias"></canvas>
+    </article>
+
+    <article class="contenedor-grafico">
+        <h2>Avistamientos por ave</h2>
+        <canvas id="grafico-aves"></canvas>
+    </article>
+
+    <article class="contenedor-grafico">
+        <h2>Voluntarios por comuna</h2>
+        <canvas id="grafico-comunas"></canvas>
+    </article>
+</div>
+
+<script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
+{% endblock %}

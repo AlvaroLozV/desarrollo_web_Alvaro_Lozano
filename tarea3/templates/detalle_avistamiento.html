@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle de Avistamiento - Registro Aviario{% endblock %}
+{% block encabezado %}Detalle del Avistamiento{% endblock %}
+
+{% block contenido %}
+<dl>
+    <dt>Ave</dt>
+    <dd>{{ avistamiento.ave.nombre }}</dd>
+
+    <dt>Lugar</dt>
+    <dd>{{ avistamiento.lugar }}</dd>
+
+    <dt>Fecha y hora</dt>
+    <dd>{{ avistamiento.fecha_hora.strftime('%d-%m-%Y %H:%M') }}</dd>
+
+    <dt>Voluntario</dt>
+    <dd>{{ avistamiento.voluntario.nombre }} ({{ avistamiento.voluntario.email }})</dd>
+
+    {% if avistamiento.descripcion %}
+        <dt>Descripción</dt>
+        <dd>{{ avistamiento.descripcion }}</dd>
+    {% endif %}
+</dl>
+
+<h2>Fotos y videos</h2>
+<section id="galeria-archivos">
+    {% for registro in avistamiento.registros %}
+        {% set extension = registro.ruta_archivo.rsplit('.', 1)[-1].lower() %}
+        <figure>
+            {% if extension in ['mp4', 'mov', 'avi', 'webm'] %}
+                <video controls>
+                    <source src="{{ url_for('static', filename=registro.ruta_archivo) }}">
+                    Tu navegador no soporta la reproducción de este video.
+                </video>
+            {% else %}
+                <img src="{{ url_for('static', filename=registro.ruta_archivo) }}"
+                     alt="Foto del avistamiento">
+            {% endif %}
+            <figcaption>{{ registro.nombre_archivo }}</figcaption>
+        </figure>
+    {% else %}
+        <p>Este avistamiento no tiene archivos adjuntos.</p>
+    {% endfor %}
+</section>
+
+<section id="comentarios" data-avistamiento-id="{{ avistamiento.id }}">
+    <h2>Comentarios</h2>
+ 
+    <ul id="lista-comentarios">
+        <li>Cargando comentarios...</li>
+    </ul>
+ 
+    <h3>Agregar comentario</h3>
+    <form id="form-comentario" novalidate>
+        <label for="comentario_nombre">Tu nombre: *</label>
+        <input type="text" id="comentario_nombre" name="nombre" minlength="3" maxlength="50" required>
+        <span id="error-nombre" class="mensaje-error"></span>
+        <br>
+ 
+        <label for="comentario_texto">Comentario: *</label>
+        <textarea id="comentario_texto" name="texto" rows="3" cols="40" maxlength="300" required></textarea>
+        <span id="error-texto" class="mensaje-error"></span>
+        <br>
+ 
+        <button type="submit">Agregar comentario</button>
+        <span id="mensaje-comentario"></span>
+    </form>
+</section>
+ 
+<p><a href="{{ url_for('listado_avistamientos') }}">&laquo; Volver al listado</a></p>
+ 
+<script src="{{ url_for('static', filename='js/comentarios.js') }}"></script>
+{% endblock %}

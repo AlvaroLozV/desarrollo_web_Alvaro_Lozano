@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registro Aviario{% endblock %}
+{% block encabezado %}Listado de Avistamientos{% endblock %}
+
+{% block contenido %}
+<section id="controles-listado">
+    <form method="GET" id="form-filtros">
+        <label for="ave_id">Filtrar por ave:</label>
+        <select id="ave_id" name="ave_id" onchange="this.form.submit()">
+            <option value="">Todas</option>
+            {% for ave in aves %}
+                <option value="{{ ave.id }}" {% if ave_id_actual == ave.id|string %}selected{% endif %}>
+                    {{ ave.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="orden">Ordenar por:</label>
+        <select id="orden" name="orden" onchange="this.form.submit()">
+            <option value="fecha_desc" {% if orden_actual == 'fecha_desc' %}selected{% endif %}>
+                Fecha (más reciente primero)
+            </option>
+            <option value="fecha_asc" {% if orden_actual == 'fecha_asc' %}selected{% endif %}>
+                Fecha (más antigua primero)
+            </option>
+            <option value="lugar_asc" {% if orden_actual == 'lugar_asc' %}selected{% endif %}>
+                Lugar (A-Z)
+            </option>
+        </select>
+    </form>
+</section>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ave</th>
+            <th>Lugar</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Voluntario</th>
+        </tr>
+    </thead>
+    <tbody id="tbody-avistamientos">
+        {% for a in paginacion.items %}
+            <tr onclick="window.location='{{ url_for('detalle_avistamiento', avistamiento_id=a.id) }}'"
+                style="cursor:pointer">
+                <td>{{ a.ave.nombre }}</td>
+                <td>{{ a.lugar }}</td>
+                <td>{{ a.fecha_hora.strftime('%d-%m-%Y') }}</td>
+                <td>{{ a.fecha_hora.strftime('%H:%M') }}</td>
+                <td>{{ a.voluntario.nombre }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5">No hay avistamientos que coincidan con el filtro.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<section id="paginacion">
+    {% if paginacion.has_prev %}
+        <button onclick="window.location='{{ url_for('listado_avistamientos', pagina=paginacion.prev_num, ave_id=ave_id_actual, orden=orden_actual) }}'">&laquo; Anterior</button>
+    {% else %}
+        <button id="btn-anterior" disabled>&laquo; Anterior</button>
+    {% endif %}
+
+    <span id="info-pagina">Página {{ paginacion.page }} de {{ paginacion.pages or 1 }} ({{ paginacion.total }} resultados)</span>
+
+    {% if paginacion.has_next %}
+        <button onclick="window.location='{{ url_for('listado_avistamientos', pagina=paginacion.next_num, ave_id=ave_id_actual, orden=orden_actual) }}'">Siguiente &raquo;</button>
+    {% else %}
+        <button id="btn-siguiente" disabled>Siguiente &raquo;</button>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registro Aviario{% endblock %}
+{% block encabezado %}Registro de aves de Chile{% endblock %}
+{% block subtitulo %}<p>Bienvenidos/as a el registro de aves</p>{% endblock %}
+
+{% block contenido %}
+    <section>
+        <h2>Últimos avistamientos registrados</h2>
+        {% if avistamientos %}
+            <div id="ultimos-avistamientos">
+                {% for a in avistamientos %}
+                    <article class="tarjeta-avistamiento">
+                        {% if a.registros %}
+                            {% set registro = a.registros[0] %}
+                            {% set extension = registro.ruta_archivo.rsplit('.', 1)[-1].lower() %}
+                            {% if extension in ['mp4', 'mov', 'avi', 'webm'] %}
+                                <video controls>
+                                    <source src="{{ url_for('static', filename=registro.ruta_archivo) }}">
+                                </video>
+                            {% else %}
+                                <img src="{{ url_for('static', filename=registro.ruta_archivo) }}"
+                                     alt="Foto de {{ a.ave.nombre }}">
+                            {% endif %}
+                        {% else %}
+                            <div class="sin-foto">Sin foto disponible</div>
+                        {% endif %}
+                        <p class="detalle-avistamiento">
+                            <strong>{{ a.ave.nombre }}</strong> — {{ a.lugar }}<br>
+                            <a href="{{ url_for('detalle_avistamiento', avistamiento_id=a.id) }}">Ver detalle</a>
+                        </p>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aún no hay avistamientos registrados.</p>
+        {% endif %}
+    </section>
+{% endblock %}
